@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class Welcome
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Welcome")
+public class Welcome extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public Welcome() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,20 +27,20 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session = request.getSession(false);
-		if(session != null && session.getAttribute("user") != null){
-			request.getRequestDispatcher("/WEB-INF/Welcome.jsp").forward(request, response);;
-			return;	
+		if(session == null){
+			response.sendRedirect("/DarkFantasyNew/Login");
+			return;
+		} else {
+		request.getRequestDispatcher("/WEB-INF/Welcome.jsp").forward(request, response);
 		}
-		request.getRequestDispatcher("/WEB-INF/FrontPage.jsp").forward(request, response);;
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
