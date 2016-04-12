@@ -30,10 +30,10 @@ public class Login extends HttpServlet {
 		
 		HttpSession session = request.getSession(false);
 		if(session != null && session.getAttribute("user") != null){
-			request.getRequestDispatcher("/WEB-INF/Welcome.jsp").forward(request, response);;
+			request.getRequestDispatcher("/WEB-INF/welcome.jsp").forward(request, response);;
 			return;	
 		}
-		request.getRequestDispatcher("/WEB-INF/FrontPage.jsp").forward(request, response);;
+		request.getRequestDispatcher("/WEB-INF/frontpage.jsp").forward(request, response);;
 	}
 
 	/**

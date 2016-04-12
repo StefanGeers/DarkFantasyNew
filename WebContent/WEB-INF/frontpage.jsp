@@ -14,6 +14,9 @@
 <label for=user>Username: </label><input type=text name=user><br>
 <label for=pwd>Password: </label><input type=password name=pwd><br>
 <input type=submit>
+
+<p>Don't have an account yet?</p>
+<p><a href = "/WEB-INF/Register.jsp">Register here!</a></p>
 </form>
 </body>
 </html>
