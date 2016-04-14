@@ -1,11 +1,14 @@
 package characterclasses;
 
+import javax.persistence.OneToOne;
+
+import database.Account;
 import items.Sword;
 import items.Weapon;
 
 public class Player extends Character{
 	private String playerName;
-	//private Account account;
+	private Account account;
 	
 	public Weapon Weapon = new Sword("sword", 40, 10, 25);
 
@@ -22,6 +25,13 @@ public class Player extends Character{
 	public String getName(){
 		return this.playerName;
 	}
-	
 
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	
+	@OneToOne
+	public Account getAccount(){
+		return account;
+	}
 }
