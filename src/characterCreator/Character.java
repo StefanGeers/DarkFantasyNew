@@ -1,4 +1,4 @@
-package turnBasedCombat;
+package characterCreator;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ public class Character {
 	private String profession;
 	private String thoughtDescription;
 	private String armorDescription;
-	
+
 	//Offensive stats
 	private int damage;
 	private ArrayList<String> dmgType;
@@ -33,10 +33,6 @@ public class Character {
 		//sets all resistance multipliers to 1.0
 		piercingRes = bashingRes = slashingRes = blastRes = fireRes = elecRes = iceRes = earthRes = darkRes = holyRes = natureRes = spiritRes = 1.0;
 	}
-	
-	
-	
-	
 	
 	//getter en setter functies start here
 	

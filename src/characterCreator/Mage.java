@@ -1,4 +1,4 @@
-package turnBasedCombat;
+package characterCreator;
 
 public class Mage extends Humanoid {
 
@@ -7,7 +7,7 @@ public class Mage extends Humanoid {
 	public Mage(String name, String job, int maxHealth, int currentHealth) {
 		super(name, job, maxHealth, currentHealth);
 
-		setPiercingRes(2.0); 
+		setPiercingRes(500.0); 
 		setBashingRes(1.0);
 		setSlashingRes(0.5);
 		setBlastRes(1.0);

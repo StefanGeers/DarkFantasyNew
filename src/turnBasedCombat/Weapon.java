@@ -19,10 +19,10 @@ public class Weapon {
 	}
 
 	public Weapon(String name, int slashDMG, int bashDMG, int pierceDMG){
-		name = name;
-		slashDMG = slashDMG;
-		bashDMG = bashDMG;
-		pierceDMG = pierceDMG;
+		setName(name);
+		setSlashDMG(slashDMG);
+		setBashDMG(bashDMG);
+		setPierceDMG(pierceDMG);
 	}
 
 	public String getName() {

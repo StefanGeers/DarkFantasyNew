@@ -1,4 +1,4 @@
-package turnBasedCombat;
+package characterCreator;
 
 public class Humanoid extends NPC {
 
