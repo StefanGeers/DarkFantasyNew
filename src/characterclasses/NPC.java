@@ -1,4 +1,4 @@
-package characterCreator;
+package characterclasses;
 
 public class NPC extends Character {
 	public NPC(String NPC_name, String job, int maxHealth, int currentHealth){

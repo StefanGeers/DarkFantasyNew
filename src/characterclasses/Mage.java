@@ -1,4 +1,4 @@
-package characterCreator;
+package characterclasses;
 
 public class Mage extends Humanoid {
 

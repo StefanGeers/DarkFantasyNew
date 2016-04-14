@@ -1,4 +1,4 @@
-package characterCreator;
+package characterclasses;
 
 import java.util.ArrayList;
 

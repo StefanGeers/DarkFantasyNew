@@ -1,11 +1,11 @@
-package turnBasedCombat;
+package turnbasedcombat;
 
 import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import characterCreator.Character;
-import characterCreator.Player;
+import characterclasses.Character;
+import characterclasses.Player;
 
 public class CombatResolved {
 		

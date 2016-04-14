@@ -1,10 +1,10 @@
-package turnBasedCombat;
+package turnbasedcombat;
 
-import characterCreator.GreaterDemon;
-import characterCreator.Imp;
-import characterCreator.NPC;
-import characterCreator.PatheticDemonologist;
-import characterCreator.Player;
+import characterclasses.GreaterDemon;
+import characterclasses.Imp;
+import characterclasses.NPC;
+import characterclasses.PatheticDemonologist;
+import characterclasses.Player;
 
 public class TempMain {
 	public static void main(String[] args){

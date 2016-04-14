@@ -1,7 +1,7 @@
-package characterCreator;
+package characterclasses;
 
-import turnBasedCombat.Sword;
-import turnBasedCombat.Weapon;
+import items.Sword;
+import items.Weapon;
 
 public class Player extends Character{
 	private String playerName;
