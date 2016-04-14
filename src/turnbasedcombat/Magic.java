@@ -22,7 +22,7 @@ public class Magic extends CombatResolved{
 	}
 	
 	public static void MindRead(Character caster, Character target){
-		int spellDMG = 10;
+		int spellDMG = 11;
 		ArrayList<String> atkTypes = new ArrayList<String>();
 		atkTypes.add("blast");
 		atkTypes.add("spirit");

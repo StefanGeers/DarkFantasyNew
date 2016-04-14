@@ -27,7 +27,7 @@ public class CombatResolved{
 				}
 					System.out.println("\n");
 			}
-			System.out.println("You win");
+			System.out.println("You win!");
 		}
 		
 		private static void playerTurn(Player Player, Character Enemy1, Character Enemy2, Character Enemy3){
