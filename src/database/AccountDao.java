@@ -35,7 +35,7 @@ public class AccountDao {
 	
 	public static void addPlayer(Account account, Player player){
 		account.setPlayer(player);
-		//player.setAccount(account);
+		player.setAccount(account);
 	}
 	
 	/**
