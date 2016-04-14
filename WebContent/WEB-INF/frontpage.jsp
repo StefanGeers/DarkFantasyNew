@@ -13,7 +13,7 @@
 <p>Please login:</p>
 <form method=post>
 <label for=user>Username: </label><input type=text name=user><br>
-<label for=pwd>Password:</label><input type=password name=pwd><br>
+<label for=pwd>Password:</label><input type=password name=pwd ><br>
 <input type=submit value="Submit">
 
 <p>Don't have an account yet?</p>

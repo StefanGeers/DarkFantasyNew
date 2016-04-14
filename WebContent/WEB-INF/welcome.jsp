@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Welcome!</title>
 </head>
-<body> Welcome <% %>
+<body> Welcome ${account.username}
 
 </body>
 </html>
