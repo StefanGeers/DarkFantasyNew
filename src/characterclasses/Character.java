@@ -9,6 +9,8 @@ public class Character {
 	private String profession;
 	private String thoughtDescription;
 	private String armorDescription;
+	private int mana;
+
 
 	//Offensive stats
 	private int damage;
@@ -180,5 +182,12 @@ public class Character {
 
 	public void setArmorDescription(String armorDescription) {
 		this.armorDescription = armorDescription;
+	}
+	public int getMana() {
+		return mana;
+	}
+
+	public void setMana(int mana) {
+		this.mana = mana;
 	}
 }

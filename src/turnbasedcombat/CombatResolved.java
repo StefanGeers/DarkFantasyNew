@@ -6,7 +6,7 @@ import java.util.Scanner;
 import characterclasses.Character;
 import characterclasses.Player;
 
-public class CombatResolved {
+public class CombatResolved{
 		
 		public void CombatResolution(Player Player, Character Enemy1){CombatResolution(Player, Enemy1, null, null);}
 		public void CombatResolution(Player Player, Character Enemy1, Character Enemy2){CombatResolution(Player, Enemy1, Enemy2, null);}
@@ -58,7 +58,16 @@ public class CombatResolved {
 				case 3: bashingAtk(Player, target); break;
 				}
 			}
-			else if (choice == 2 || choice == 3){System.out.println("what did I say about defending? It's not implemented yet, so stop being a scrub and start attacking.");}
+			else if (choice == 2){System.out.println("what did I say about defending? It's not implemented yet, so stop being a scrub and start attacking.");}
+			else if (choice == 3){
+				System.out.println("What spell do you want to cast?\n 1) Read mind\n 2) Ice Spike\n 3) Fireball");
+				choice = input.nextInt();
+				switch(choice){
+				case 1: Magic.MindRead((Character)Player, target); break;
+				case 2: Magic.IceSpike((Character)Player, target); break;
+				case 3: Magic.Fireball((Character) Player, target); break;
+				}
+			}
 			else if (choice == 4){
 				System.out.println("What kind of item did you want to use?\n 1) Health Potion");
 				choice = input.nextInt();
@@ -116,7 +125,7 @@ public class CombatResolved {
 			else {return;}
 		}
 		
-		private static double calcDMGMod(ArrayList<String> atktypes, Character Defender){
+		protected static double calcDMGMod(ArrayList<String> atktypes, Character Defender){
 			double atkMod = 1.0;
 			
 			for (int i = 0 ; i < atktypes.size(); i++){
@@ -152,7 +161,7 @@ public class CombatResolved {
 		}
 		
 		//Death text
-		private static void Death(Character Defender){
+		protected static void Death(Character Defender){
 			
 			if (Defender.getCurrentHP() <= 0){
 				System.out.println("\nThe " + Defender.getProfession() + " collapses under the weight of his wounds. He dies on the cold ground.");
@@ -169,7 +178,9 @@ public class CombatResolved {
 			
 			if (newHealth <= 0){
 				newHealth = 0;
-
+				Defender.setCurrentHP(newHealth);
+				Death(Defender);
+				return;
 			}
 			
 			Defender.setCurrentHP(newHealth);

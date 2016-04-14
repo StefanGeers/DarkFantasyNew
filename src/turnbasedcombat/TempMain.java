@@ -20,8 +20,6 @@ public class TempMain {
 		System.out.println("The battle begins!!!\n");
 		CombatResolved.CombatResolution(p,q,r,s);
 
-
-		
 	}
 }
 
