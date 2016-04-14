@@ -1,6 +1,5 @@
 package turnbasedcombat;
 
-import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.Scanner;
 
