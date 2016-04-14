@@ -15,7 +15,7 @@ public class Account {
 	private Long id;
 	private String username;
 	private String password;
-	private Player player;
+	private Player player = null;
 	
 	
 	@Id
@@ -54,7 +54,8 @@ public class Account {
 		this.player = player;
 	}
 	
-	public void setId(Long id) {
+	@SuppressWarnings("unused")
+	private void setId(Long id) {
 		this.id = id;
 	}
 	

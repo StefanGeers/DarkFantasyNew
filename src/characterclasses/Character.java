@@ -29,6 +29,8 @@ public class Character {
 	//elemental resistance
 	private double fireRes, elecRes, iceRes, earthRes, darkRes, holyRes, natureRes, spiritRes;
 	
+	public Character(){}
+	
 	public Character(int maxHealth, int currentHealth){
 		maxHP = maxHealth;
 		currentHP = currentHealth;

@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class AccountRegistratie {
@@ -14,11 +13,9 @@ public class AccountRegistratie {
 	 */
 	@RequestMapping("/")
 	public String overzicht(Model model) {
-		model.addAttribute("accounts", AccountDao.all());
+		model.addAttribute("accounts", AccountDao.allAccounts());
 		return "/login";
 	}
-
-	
 	
 	/**
 	 * Toon een detail-view van een enkele account
@@ -33,7 +30,7 @@ public class AccountRegistratie {
 			// id is geen getal? error 404
 			return null;
 		}
-		Account account = AccountDao.find(key);
+		Account account = AccountDao.findAccount(key);
 		if(account == null){
 			// geen account met gegeven id? error 404
 			return null;
@@ -63,11 +60,11 @@ public class AccountRegistratie {
 	}
 	
 	
-	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String nieuw(String username, String password, Long id){
-		AccountDao.create(username, password, id);
+	/*@RequestMapping(value="/register", method=RequestMethod.POST)
+	public String nieuw(String username, String password){
+		AccountDao.create(username, password);
 		return "redirect:/charactercreation";
-	}
+	}*/
 	
 	
 }

@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import database.AccountDao;
+
 @Controller
 public class GameController {
 	
@@ -13,10 +15,10 @@ public class GameController {
 		return "frontpage";
 	}
 	
-	/*@RequestMapping (value="/register", method=RequestMethod.GET)
+	@RequestMapping (value="/register", method=RequestMethod.GET)
 	public String Register(){
 		return "register";
-	}*/
+	}
 	
 	@RequestMapping (value="/login", method=RequestMethod.GET)
 	public String Login(RedirectAttributes redirectAttrs){
@@ -32,6 +34,17 @@ public class GameController {
 			return "welcome";	
 		}
 		return "frontpage";
+	}
+	
+	@RequestMapping (value="/charactercreation", method=RequestMethod.GET)
+	public String CharacterCreation(){
+		return "charactercreation";
+	}
+	
+	@RequestMapping(value="/register", method=RequestMethod.POST)
+	public String nieuw(String username, String password){
+		AccountDao.createAccount(username, password);
+		return "redirect:/charactercreation";
 	}
 
 }
