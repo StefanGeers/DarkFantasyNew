@@ -15,17 +15,29 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class EntityManagerManager implements ServletContextListener, ServletContainerInitializer {
 
-	private static EntityManagerFactory emf; 
+	private static EntityManagerFactory emfa; 
+	private static EntityManagerFactory emfp;
 	
-	private static EntityManagerFactory getEMF(){
-		if(emf == null){
-			emf = Persistence.createEntityManagerFactory("ritten");
+	private static EntityManagerFactory getEMFA(){
+		if(emfa == null){
+			emfa = Persistence.createEntityManagerFactory("accounts");
 		}
-		return emf;
+		return emfa;
 	}
 	
-	public static EntityManager getEntityManager(){
-		return getEMF().createEntityManager();
+	private static EntityManagerFactory getEMFP(){
+		if(emfp == null){
+			emfp = Persistence.createEntityManagerFactory("players");
+		}
+		return emfp;
+	}
+	
+	public static EntityManager getAccountEntityManager(){
+		return getEMFA().createEntityManager();
+	}
+	
+	public static EntityManager getPlayerEntityManager(){
+		return getEMFP().createEntityManager();
 	}
 	
 	@Override
@@ -33,9 +45,13 @@ public class EntityManagerManager implements ServletContextListener, ServletCont
 
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
-		if(emf != null){
-			System.out.println("Closing EntityManagerFactory");
-			emf.close();
+		if(emfa != null){
+			System.out.println("Closing AccountManagerFactory");
+			emfa.close();
+		}
+		if(emfp != null){
+			System.out.println("Closing PlayerManagerFactory");
+			emfp.close();
 		}
 	}
 

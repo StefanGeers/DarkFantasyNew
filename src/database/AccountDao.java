@@ -12,13 +12,13 @@ public class AccountDao {
 	/**
 	 * Maak een nieuwe Account aan en sla die op in de database
 	 */
-	public static Account create(String username, String password, Long id){
+	public static Account createAccount(String username, String password){
 		Account account = new Account();
 		account.setUsername(username);
 		account.setPassword(password);
-		account.setId(id);
 		
-		EntityManager em = EntityManagerManager.getEntityManager();
+		
+		EntityManager em = EntityManagerManager.getAccountEntityManager();
 		EntityTransaction t = em.getTransaction();
 		t.begin();
 		em.persist(account);
@@ -42,7 +42,7 @@ public class AccountDao {
 	 * Verwijder een account uit de database
 	 */
 	public static void remove(Long id){
-		EntityManager em = EntityManagerManager.getEntityManager();
+		EntityManager em = EntityManagerManager.getAccountEntityManager();
 		EntityTransaction t = em.getTransaction();
 		t.begin();
 		Account account = em.find(Account.class, id);
@@ -57,8 +57,8 @@ public class AccountDao {
 	 * Haal een account op a.d.h.v. zijn id
 	 */
 	
-	public static Account find(Long id){
-		EntityManager em = EntityManagerManager.getEntityManager();
+	public static Account findAccount(Long id){
+		EntityManager em = EntityManagerManager.getAccountEntityManager();
 		EntityTransaction t = em.getTransaction();
 		t.begin();
 		Account account = em.find(Account.class, id);
@@ -67,16 +67,36 @@ public class AccountDao {
 		return account;
 	}
 	
+	public static Player findPlayer(Long id){
+		EntityManager em = EntityManagerManager.getPlayerEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		Player player = em.find(Player.class, id);
+		t.commit();
+		em.close();
+		return player;
+	}
+	
 	/**
 	 * Haal alle accounts op uit de database
 	 */
-	public static List<Account> all(){
-		EntityManager em = EntityManagerManager.getEntityManager();
+	public static List<Account> allAccounts(){
+		EntityManager em = EntityManagerManager.getAccountEntityManager();
 		EntityTransaction t = em.getTransaction();
 		t.begin();
 		List<Account> accounts = em.createQuery("from Account", Account.class).getResultList();
 		t.commit();
 		em.close();
 		return accounts;
+	}
+	
+	public static List<Player> allPlayers(){
+		EntityManager em = EntityManagerManager.getPlayerEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		List<Player> players = em.createQuery("from Player", Player.class).getResultList();
+		t.commit();
+		em.close();
+		return players;
 	}
 }
