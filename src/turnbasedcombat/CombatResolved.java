@@ -47,7 +47,7 @@ public class CombatResolved {
 			}
 			else{ System.out.println("please only select numbers in the range 1-4");}
 			
-			System.out.println("What do you want to do?\n 1) Attack \n 2) Defend(To be added) \n 3) Magic \n 4) Items \n 5) take another look at your foes");
+			System.out.println("What do you want to do?\n 1) Attack \n 2) Defend(To be added) \n 3) Magic(To be added) \n 4) Items \n 5) take another look at your foes");
 			choice = input.nextInt();
 			if (choice == 1){
 				System.out.println("What kind of attack did you have in mind?\n 1) Slash \n 2) Stab \n 3) Pommelstrike");
@@ -58,7 +58,7 @@ public class CombatResolved {
 				case 3: bashingAtk(Player, target); break;
 				}
 			}
-			else if (choice == 2){System.out.println("what did I say about defending? It's not implemented yet, so stop being a scrub and start attacking.");}
+			else if (choice == 2 || choice == 3){System.out.println("what did I say about defending? It's not implemented yet, so stop being a scrub and start attacking.");}
 			else if (choice == 4){
 				System.out.println("What kind of item did you want to use?\n 1) Health Potion");
 				choice = input.nextInt();
