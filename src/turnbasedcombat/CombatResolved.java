@@ -16,8 +16,11 @@ public class CombatResolved{
 			int playerHP = Player.getCurrentHP();
 			int totalEnemyHP = Enemy1.getCurrentHP()+Enemy2.getCurrentHP()+Enemy3.getCurrentHP();
 			//int playerDMG = Player.getDamage();
-			
+						
 			while (playerHP > 0 && totalEnemyHP > 0){
+				if (Player.getCurrentHP() <= 0){
+					PlayerDeath.playerDies();
+				}
 				playerTurn(Player, Enemy1, Enemy2, Enemy3);
 				totalEnemyHP = Enemy1.getCurrentHP()+Enemy2.getCurrentHP()+Enemy3.getCurrentHP();
 				if(totalEnemyHP > 0){
@@ -33,19 +36,18 @@ public class CombatResolved{
 		private static void playerTurn(Player Player, Character Enemy1, Character Enemy2, Character Enemy3){
 			Character target = Player;
 			
-			System.out.print("Who do you want to interact with?\n 1) " + Enemy1.getProfession() + "\n 2) " + Enemy2.getProfession() + "\n 3) " + Enemy3.getProfession() + "\n 4) yourself!\n");
+			System.out.print("Who do you want to interact with?\n 1) " + Enemy1.getProfession() + "\n 2) " + Enemy2.getProfession() + "\n 3) " + Enemy3.getProfession() + "\n 4) yourself! \n 5) I first take another close look at my foes.");
 			Scanner input = new Scanner(System.in);
 			int choice = input.nextInt();
 
-			if (choice > 0 && choice <= 4){
 				switch(choice){
 				case 1: target = Enemy1; break;
 				case 2: target = Enemy2; break;
 				case 3: target = Enemy3; break;
 				case 4: target = Player; break;
-				}
+				case 5: inspect(Player, Enemy1, Enemy2, Enemy3); break;
+				default: System.out.println("next time please chooose a listed number"); playerTurn(Player, Enemy1, Enemy2, Enemy3);
 			}
-			else{ System.out.println("please only select numbers in the range 1-4");}
 			
 			System.out.println("What do you want to do?\n 1) Attack \n 2) Defend(To be added) \n 3) Magic(To be added) \n 4) Items \n 5) take another look at your foes");
 			choice = input.nextInt();
@@ -56,6 +58,7 @@ public class CombatResolved{
 				case 1: slashingAtk(Player, target); break;
 				case 2: piercingAtk(Player, target); break;
 				case 3: bashingAtk(Player, target); break;
+				default: System.out.println("next time please choose a listed number"); playerTurn(Player, Enemy1, Enemy2, Enemy3);
 				}
 			}
 			else if (choice == 2){System.out.println("what did I say about defending? It's not implemented yet, so stop being a scrub and start attacking.");}
@@ -66,6 +69,7 @@ public class CombatResolved{
 				case 1: Magic.MindRead((Character)Player, target); break;
 				case 2: Magic.IceSpike((Character)Player, target); break;
 				case 3: Magic.Fireball((Character) Player, target); break;
+				default: System.out.println("next time please choose a listed number"); playerTurn(Player, Enemy1, Enemy2, Enemy3);
 				}
 			}
 			else if (choice == 4){
@@ -73,19 +77,19 @@ public class CombatResolved{
 				choice = input.nextInt();
 				switch(choice){
 				case 1: Player.setCurrentHP(Player.getMaxHP()); System.out.println("\n Your wounds knit before your very eyes, and energy surges back into your tired limbs"); break;
-				default: System.out.println("next time please choice a listed number"); break;
+				default: System.out.println("next time please choose a listed number"); playerTurn(Player, Enemy1, Enemy2, Enemy3);
 				}
 			}
 			else if (choice == 5){
-				inspect(Enemy1, Enemy2, Enemy3);
+				inspect(Player, Enemy1, Enemy2, Enemy3);
 				
 			}
 			else{
-				System.out.println("please choose a number between 1 and 5");
+				System.out.println("please choose a number between 1 and 5"); playerTurn(Player, Enemy1, Enemy2, Enemy3);
 			}
 		}
 		
-		private static void inspect(Character Enemy1, Character Enemy2, Character Enemy3){
+		private static void inspect(Player Player, Character Enemy1, Character Enemy2, Character Enemy3){
 			String standing = "";
 			String dead = "";
 			String description = "";
@@ -115,6 +119,7 @@ public class CombatResolved{
 			if (death){
 			System.out.println("All the while " + dead + " decays into the dirt." );
 			}
+		playerTurn(Player, Enemy1, Enemy2, Enemy3);
 		}
 			
 		private static void theirTurn(Player Player, Character Enemy){

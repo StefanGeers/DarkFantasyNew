@@ -32,6 +32,7 @@ public class Player extends Character{
 		super(maxHealth, currentHealth);
 		setPlayerName(PC_name);
 		setDamage(damageDealing);
+		setProfession("Player");
 	}
 	
 	public void setPlayerName(String name){
