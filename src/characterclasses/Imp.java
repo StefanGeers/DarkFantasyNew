@@ -12,7 +12,7 @@ public class Imp extends Demon{
 		setDmgType(DMGType);
 		setAttackDescription("The imp charges at you slashing wildly with his razorsharp claws.");
 		setArmorDescription("The imp seem weathered and abused, scars riddle his body, from both blades and fire, but the skin seems thin, and his frame frail.");
-	
+		setThoughtDescription("All you get from the pathetic imp are some fleeting images of horror, torture and terror. The life of an imp isn't great.");
 		
 		setPiercingRes(2.0); 
 		setBashingRes(3.0);

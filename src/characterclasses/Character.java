@@ -24,8 +24,10 @@ public class Character {
 	private int parry;
 	
 	//armor resistance
-	private double piercingRes, bashingRes, slashingRes, blastRes;
+	private double healingRes, piercingRes, bashingRes, slashingRes, blastRes;
 	
+
+
 	//elemental resistance
 	private double fireRes, elecRes, iceRes, earthRes, darkRes, holyRes, natureRes, spiritRes;
 	
@@ -35,7 +37,7 @@ public class Character {
 		maxHP = maxHealth;
 		currentHP = currentHealth;
 		//sets all resistance multipliers to 1.0
-		piercingRes = bashingRes = slashingRes = blastRes = fireRes = elecRes = iceRes = earthRes = darkRes = holyRes = natureRes = spiritRes = 1.0;
+		healingRes = piercingRes = bashingRes = slashingRes = blastRes = fireRes = elecRes = iceRes = earthRes = darkRes = holyRes = natureRes = spiritRes = 1.0;
 	}
 	
 	//getter en setter functies start here
@@ -191,5 +193,12 @@ public class Character {
 
 	public void setMana(int mana) {
 		this.mana = mana;
+	}
+	public double getHealingRes() {
+		return healingRes;
+	}
+
+	public void setHealingRes(double healingRes) {
+		this.healingRes = healingRes;
 	}
 }
