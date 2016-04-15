@@ -11,9 +11,9 @@ public class PlayerDeath {
 		String[] scrubby = {};
 		
 		switch(choice){
-		case 1: TempMain.main(scrubby); break;
+		case 1: TempMain.main(scrubby);
 		case 2: System.out.println("Fine give up then! You sicken me!"); System.exit(0);
-		default: System.out.println("Please select one or two."); playerDies();
+		default: System.out.println("Please select option one or two."); playerDies();
 		}
 	}
 }
