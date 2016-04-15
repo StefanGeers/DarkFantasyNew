@@ -28,7 +28,7 @@ public class CombatResolved{
 					theirTurn(Player, Enemy2);
 					theirTurn(Player, Enemy3);
 				}
-					System.out.println("\n");
+				System.out.println(""+ "You have " + Player.getCurrentHP() + " HP remaining\n");
 			}
 			System.out.println("You win!");
 		}
@@ -49,7 +49,7 @@ public class CombatResolved{
 				default: System.out.println("next time please chooose a listed number"); playerTurn(Player, Enemy1, Enemy2, Enemy3);
 			}
 			
-			System.out.println("What do you want to do?\n 1) Attack \n 2) Defend(To be added) \n 3) Magic(To be added) \n 4) Items \n 5) take another look at your foes");
+			System.out.println("What do you want to do?\n 1) Attack \n 2) Defend(To be added) \n 3) Magic \n 4) Items \n 5) take another look at your foes");
 			choice = input.nextInt();
 			if (choice == 1){
 				System.out.println("What kind of attack did you have in mind?\n 1) Slash \n 2) Stab \n 3) Pommelstrike");
@@ -63,12 +63,14 @@ public class CombatResolved{
 			}
 			else if (choice == 2){System.out.println("what did I say about defending? It's not implemented yet, so stop being a scrub and start attacking.");}
 			else if (choice == 3){
-				System.out.println("What spell do you want to cast?\n 1) Read mind\n 2) Ice Spike\n 3) Fireball");
+				System.out.println("What spell do you want to cast?\n 1) Read mind\n 2) Ice Spike\n 3) Fireball\n 4) Holy Prayer\n 5) Heal");
 				choice = input.nextInt();
 				switch(choice){
 				case 1: Magic.MindRead((Character)Player, target); break;
 				case 2: Magic.IceSpike((Character)Player, target); break;
 				case 3: Magic.Fireball((Character) Player, target); break;
+				case 4: Magic.HolyPrayer((Character)Player, target); break;
+				case 5: Magic.Heal((Character)Player, target); break;
 				default: System.out.println("next time please choose a listed number"); playerTurn(Player, Enemy1, Enemy2, Enemy3);
 				}
 			}
@@ -112,7 +114,7 @@ public class CombatResolved{
 				total += 1;
 			} else {dead = dead + "a " + Enemy3.getProfession() + ", "; death = true;}
 			
-			System.out.println("Before you " + total + " foes;" + standing + "still draw breath.");
+			System.out.println("Before you stand " + total + " foes;" + standing + "still draw breath.");
 			
 			System.out.println("" + description);
 			
@@ -124,8 +126,8 @@ public class CombatResolved{
 			
 		private static void theirTurn(Player Player, Character Enemy){
 			if(Enemy.getCurrentHP() > 0){
+				System.out.println("" + Enemy.getAttackDescription());
 				DealDamage(Enemy, Player);
-				System.out.println("" + Enemy.getAttackDescription() + " You have " + Player.getCurrentHP() + " HP remaining");
 			}
 			else {return;}
 		}
@@ -135,6 +137,7 @@ public class CombatResolved{
 			
 			for (int i = 0 ; i < atktypes.size(); i++){
 				switch (atktypes.get(i).toLowerCase()){
+					case "healing": atkMod *= Defender.getPiercingRes(); break;
 					case "piercing": atkMod *= Defender.getPiercingRes(); break;
 					case "bashing": atkMod *= Defender.getBashingRes(); break;
 					case "slashing": atkMod*= Defender.getSlashingRes(); break;
@@ -168,6 +171,10 @@ public class CombatResolved{
 		//Death text
 		protected static void Death(Character Defender){
 			
+			if (Defender.getCurrentHP() <= 0 && Defender instanceof Player){
+				System.out.println("You collapse onto the ground under the weight of your wounds");
+				PlayerDeath.playerDies();
+			}
 			if (Defender.getCurrentHP() <= 0){
 				System.out.println("\nThe " + Defender.getProfession() + " collapses under the weight of his wounds. He dies on the cold ground.");
 			}
@@ -192,6 +199,7 @@ public class CombatResolved{
 		}
 		
 		private static void piercingAtk(Player Player, Character Defender){
+			if (Defender instanceof Player){System.out.println("You take out your knife and stab yourself in the stomach, slowly dragging it until your bowels fall out.\nNext time just slit your throat its a lot less painfull, though I guess also less honorable."); PlayerDeath.playerDies();}
 			int newHealth = Defender.getCurrentHP();
 			if (newHealth <= 0){System.out.println("Stop stabbing the corpse you psychopath!"); return;}
 			double dmgMod = calcDMGMod(PlayerDMGMod(Player, "piercing"), Defender);
@@ -210,6 +218,7 @@ public class CombatResolved{
 			Defender.setCurrentHP(newHealth);
 		}
 		private static void bashingAtk(Player Player, Character Defender){
+			if (Defender instanceof Player){System.out.println("You take the blut end of you weapon and start bashing in your own skull!"); PlayerDeath.playerDies();}
 			int newHealth = Defender.getCurrentHP();
 			if (newHealth <= 0){System.out.println("You start grinding the corpse of the " + Defender.getProfession() + " into a fine bloody paste."); return;}
 			double dmgMod = calcDMGMod(PlayerDMGMod(Player, "bashing"), Defender);
@@ -228,6 +237,7 @@ public class CombatResolved{
 			Defender.setCurrentHP(newHealth);
 		}
 		private static void slashingAtk(Player Player, Character Defender){
+			if (Defender instanceof Player){System.out.println("You take out your knife and slit your own throat!"); PlayerDeath.playerDies();}
 			int newHealth = Defender.getCurrentHP();
 			if (newHealth <= 0){System.out.println("You start cutting up the " + Defender.getProfession() + "'s corpse, so as to more easily dispose of it later."); return;}
 			double dmgMod = calcDMGMod(PlayerDMGMod(Player, "slashing"), Defender);

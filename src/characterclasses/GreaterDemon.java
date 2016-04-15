@@ -12,7 +12,7 @@ public class GreaterDemon extends Demon{
 		setDmgType(DMGType);
 		setAttackDescription("The greater demon slowly advances, raising his shield, when he reaches you he swings his warhammer in a wide arc. \nHe catches you in the stomach, and you double over.");
 		setArmorDescription("The greater demon is a terrifying sight, his armor thick, his shield broad and a huge warhammer can be seen in his right hand.");
-	
+		setThoughtDescription("The greater demon's mind is a terrifying place, full of images of torturing little imps, and beautifull damsels in distress.");
 		
 		setPiercingRes(0.1); 
 		setBashingRes(0.2);
