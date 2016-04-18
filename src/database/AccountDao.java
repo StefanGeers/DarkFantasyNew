@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 import characterclasses.Player;
 
@@ -16,7 +17,6 @@ public class AccountDao {
 		Account account = new Account();
 		account.setUsername(username);
 		account.setPassword(password);
-		
 		
 		EntityManager em = EntityManagerManager.getAccountEntityManager();
 		EntityTransaction t = em.getTransaction();
@@ -62,6 +62,17 @@ public class AccountDao {
 		EntityTransaction t = em.getTransaction();
 		t.begin();
 		Account account = em.find(Account.class, id);
+		t.commit();
+		em.close();
+		return account;
+	}
+	
+	public static Account findAccount(String username){
+		EntityManager em = EntityManagerManager.getAccountEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		//Query query = em.createQuery("SELECT * FROM darkfantasy.account WHERE username=" + username);
+		Account account = (Account) em.f;
 		t.commit();
 		em.close();
 		return account;

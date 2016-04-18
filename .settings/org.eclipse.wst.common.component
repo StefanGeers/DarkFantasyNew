@@ -2,7 +2,7 @@
     <wb-module deploy-name="DarkFantasyNew">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="DarkFantasyNew"/>
         <property name="java-output-path" value="/DarkFantasyNew/build/classes"/>
+        <property name="context-root" value="DarkFantasyNew"/>
     </wb-module>
 </project-modules>

@@ -14,7 +14,7 @@ public class AccountRegistratie {
 	@RequestMapping("/")
 	public String overzicht(Model model) {
 		model.addAttribute("accounts", AccountDao.allAccounts());
-		return "/login";
+		return "frontpage";
 	}
 	
 	/**

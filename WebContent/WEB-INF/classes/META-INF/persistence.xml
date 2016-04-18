@@ -8,7 +8,7 @@
 <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
 <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/darkfantasy"/>
-<property name="hibernate.connection.username" value="stefan"/>
+<property name="hibernate.connection.username" value="root"/>
 <property name="hibernate.connection.password" value="v1erkan7"/>
 </properties>
 </persistence-unit>
@@ -21,7 +21,7 @@
 <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
 <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/darkfantasy"/>
-<property name="hibernate.connection.username" value="stefan"/>
+<property name="hibernate.connection.username" value="root"/>
 <property name="hibernate.connection.password" value="v1erkan7"/>
 </properties>
 </persistence-unit>

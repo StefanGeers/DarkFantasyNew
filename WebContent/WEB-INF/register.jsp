@@ -15,17 +15,18 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <h2 class="col-sm-offset-2">Registration</h2>
-<form class="form-horizontal" method="post">
+<form:form class="form-horizontal" method="post" modelAttribute="Account">
   <div class="form-group">
     <label for="inputUsername3" class="col-sm-2 control-label">Username</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Username">
+      <form:input path="username" type="text" class="form-control" name="username" id="inputEmail3" placeholder="Username"/>
+      <form:errors path="username"/><br>
     </div>
   </div>
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+      <form:input path="password" type="password" class="form-control" name="password" id="inputPassword3" placeholder="Password"/>
     </div>
   </div>
   <div class="form-group">
@@ -33,6 +34,6 @@
       <button type="submit" class="btn btn-default">Register</button>
     </div>
   </div>
-</form>
+</form:form>
 </body>
 </html>
