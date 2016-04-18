@@ -8,7 +8,7 @@
 <link href="<c:url value="/resources/style.css" />" rel="stylesheet"  type="text/css" />
 </head>
 <body><h2>Dark Fantasy</h2>
-<h4>The Ultimate Zoo Experience!</h4>
+<h4>The Ultimate Story Experience!</h4>
 
 <p>Please login:</p>
 <form method=post>
