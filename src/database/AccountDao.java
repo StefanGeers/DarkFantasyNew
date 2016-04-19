@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
+import javax.persistence.NoResultException;
 
 import characterclasses.Player;
 
@@ -71,8 +71,30 @@ public class AccountDao {
 		EntityManager em = EntityManagerManager.getAccountEntityManager();
 		EntityTransaction t = em.getTransaction();
 		t.begin();
-		//Query query = em.createQuery("SELECT * FROM darkfantasy.account WHERE username=" + username);
-		Account account = (Account) em.f;
+		Account account;
+		try{account = (Account) em.createQuery("select account from Account as account where username = ?1").setParameter(1, username).getSingleResult();}
+		catch(NoResultException e){account = null;}
+		//Account account = (Account) accounts.get(0);
+		t.commit();
+		em.close();
+		return account;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static Account findAccountByPassword(String password, String username){
+		EntityManager em = EntityManagerManager.getAccountEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		Account account = null;
+		List<Account> accounts = null;
+		try{accounts = em.createQuery("select account from Account as account where password = ?1").setParameter(1, password).getResultList();}
+		catch(NoResultException e){}
+		for(int i = 0; i < accounts.size(); i++){
+			if(accounts.get(i).getUsername().equals(username)){
+				account = accounts.get(i);
+				break;
+			}
+		}
 		t.commit();
 		em.close();
 		return account;
@@ -83,6 +105,19 @@ public class AccountDao {
 		EntityTransaction t = em.getTransaction();
 		t.begin();
 		Player player = em.find(Player.class, id);
+		t.commit();
+		em.close();
+		return player;
+	}
+	
+	public static Player findPlayer(String username){
+		EntityManager em = EntityManagerManager.getAccountEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		Player player;
+		try{player = (Player)em.createQuery("select player from Player as player where name = ?1").setParameter(1, username).getSingleResult();}
+		catch(NoResultException e){player = null;}
+		//Player player = (Player) players.get(0);
 		t.commit();
 		em.close();
 		return player;

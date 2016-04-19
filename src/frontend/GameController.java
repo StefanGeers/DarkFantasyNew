@@ -1,14 +1,16 @@
 package frontend;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.catalina.connector.Request;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import database.Account;
 import database.AccountDao;
@@ -17,11 +19,12 @@ import database.AccountDao;
 public class GameController {
 	
 	@RequestMapping (value="/", method=RequestMethod.GET)
-	public String DarkFantasyNew(RedirectAttributes redirectAttrs){
-		if(redirectAttrs.containsAttribute("user")){
-			return "welcome";	
-		}
-		return "frontpage";
+	public String DarkFantasyNew(Model model, HttpSession s){
+		try{ if(s == null || s.getAttribute("account").equals(null)){
+				return "frontpage";	
+			}
+		} catch (NullPointerException e){ return "frontpage";}
+		return "welcome";
 	}
 	
 	@RequestMapping (value="/register", method=RequestMethod.GET)
@@ -29,20 +32,30 @@ public class GameController {
 		return "register";
 	}
 	
-	@RequestMapping (value="/login", method=RequestMethod.GET)
-	public String Login(RedirectAttributes redirectAttrs){
-		if(redirectAttrs.containsAttribute("user")){
-			return "welcome";	
+	@RequestMapping (value="/logout", method=RequestMethod.GET)
+	public String Logout(HttpSession s){
+		if(s != null){
+			s.invalidate();
 		}
-		return "frontpage";
+		return "redirect:/";
+	}
+	
+	@RequestMapping (value="/login", method=RequestMethod.GET)
+	public String Login(Model model, HttpSession s){
+		try{ if(s == null || s.getAttribute("account").equals(null)){
+				return "redirect:/";	
+			}
+		} catch (NullPointerException e){ return "redirect:/";}
+		return "welcome";
 	}
 	
 	@RequestMapping (value="/welcome", method=RequestMethod.GET)
-	public String Welcome(RedirectAttributes redirectAttrs){
-		if(redirectAttrs.containsAttribute("user")){
-			return "welcome";	
-		}
-		return "frontpage";
+	public String Welcome(Model model, HttpSession s){
+		try{ if(s == null || s.getAttribute("account").equals(null)){
+				return "redirect:/";	
+			}
+		} catch (NullPointerException e){ return "redirect:/";}
+		return "welcome";
 	}
 	
 	@RequestMapping (value="/charactercreation", method=RequestMethod.GET)
@@ -66,9 +79,20 @@ public class GameController {
 		
 	}
 	
-	@RequestMapping(value="/frontpage", method=RequestMethod.POST)
-	public String login(){
-		return "redirect:/welcome";
+	@RequestMapping(value="/", method=RequestMethod.POST)
+	public String login(@ModelAttribute("Account") @Valid Account account, BindingResult result, Model model, HttpSession session){
+		Account accountpw = AccountDao.findAccountByPassword(new String(account.getPassword()),new String(account.getUsername()));
+		if(accountpw.equals(null)){
+			result.addError(new FieldError("account", "username", "No account found with that username/password combination."));
+		}
+		if (!result.hasErrors()) {
+			session.setAttribute("account", accountpw);
+			model.addAttribute(accountpw);
+			return "redirect:/welcome";
+		} else {
+			System.out.println("test");
+			return "frontpage";
+		}
 	}
 	
 	@ModelAttribute("Account")

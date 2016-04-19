@@ -1,5 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page session="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,17 +19,17 @@
 <h4 class="col-sm-offset-2">The Ultimate Zoo Experience!</h4>
 
 <p class="col-sm-offset-2">Please login:</p>
-<form class="form-horizontal" method="post">
+<form:form class="form-horizontal" method="post" modelAttribute="Account">
   <div class="form-group">
     <label for="inputUsername3" class="col-sm-2 control-label">Username</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="username" id="inputEmail3" placeholder="Username">
+      <form:input path="username" type="text" class="form-control" name="username" id="inputEmail3" placeholder="Username"/>
     </div>
   </div>
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" name="password" id="inputPassword3" placeholder="Password">
+      <form:input path="password" type="password" class="form-control" name="password" id="inputPassword3" placeholder="Password"/>
     </div>
   </div>
   <div class="form-group">
@@ -40,10 +43,11 @@
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Sign in</button>
+      <button type="submit" class="btn btn-default">Sign in</button><br>
+      <form:errors path="username"/><br>
     </div>
   </div>
-</form>
+</form:form>
 
 <p class="col-sm-offset-2">Don't have an account yet?</p>
 <p class="col-sm-offset-2"><a href="<c:url value="/register"/>">Register here!</a></p>
