@@ -130,5 +130,14 @@ public class GameController {
 		} catch (NullPointerException e){ return false;}
 		return true;
 	}
+	
+	@RequestMapping (value="/map", method=RequestMethod.GET)
+	public String Map(){
+		return "map";
+	}
+	@RequestMapping (value="/CombatRuins", method=RequestMethod.GET)
+	public String CombatRuins(){
+		return "CombatRuins";
+	}
 
 }

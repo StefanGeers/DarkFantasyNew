@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import characterclasses.Character;
+import characterclasses.Player;
 
 public class CombatResolved {
 

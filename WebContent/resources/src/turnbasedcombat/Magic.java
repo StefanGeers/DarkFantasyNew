@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import characterclasses.Character;
 import characterclasses.NPC;
+import characterclasses.Player;
 
 public class Magic extends CombatResolved {
 

@@ -1,3 +1,39 @@
 @CHARSET "UTF-8";
 body {margin-left: 20%;margin-right:40%;background: url("roughparchment.jpg") no-repeat center fixed; background-size: cover;}
 form:errors {color: red}
+body {margin-top: 1%; margin-left: 25%;margin-right: 10%; background: url("woodentable.jpg") no-repeat center fixed; background-size: cover;}
+menu{margin-left: 1%; margin-top: 0; position: fixed; left: 0; height: 100%; width: 15%; background: url("Paper.jpg"); background-size: cover;}
+txtoutput{background: url("Paper.jpg"); background-size: cover; position: relative; width: 50%; height: 50%;}
+menubutton{ margin-left: 10%; margin-right: 10%; width: 80%; height: 7%; position: relative;}
+button{margin-left: 5%; margin-right: 5%; width: 90%; height: 20%; position: absolute;}
+map{}
+
+
+.ui-accordion .ui-accordion-header {
+	background: url("Paper.jpg");
+	display: block;
+	cursor: pointer;
+	position: relative;
+	margin: 2px 0 0 0;
+	padding: .5em .5em .5em .7em;
+	min-height: 0; /* support: IE7 */
+	font-size: 100%;
+}
+.ui-accordion .ui-accordion-icons {
+	padding-left: 2.2em;
+}
+.ui-accordion .ui-accordion-icons .ui-accordion-icons {
+	padding-left: 2.2em;
+}
+.ui-accordion .ui-accordion-header .ui-accordion-header-icon {
+	position: absolute;
+	left: .5em;
+	top: 50%;
+	margin-top: -8px;
+}
+.ui-accordion .ui-accordion-content {
+	background: url("Paper.jpg");
+	padding: 1em 2.2em;
+	border-top: 0;
+	overflow: auto;
+}

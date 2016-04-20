@@ -4,6 +4,7 @@ import characterclasses.GreaterDemon;
 import characterclasses.Imp;
 import characterclasses.NPC;
 import characterclasses.PatheticDemonologist;
+import characterclasses.Player;
 
 public class TempMain {
 	public static String main(){
