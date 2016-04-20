@@ -17,7 +17,8 @@
 <input type=submit value="Submit">
 
 <p>Don't have an account yet?</p>
-<p><a href="<c:url value="/register"/>">Register here!</a></p>
+<p><a href="<c:url value="/map"/>">Register here!</a></p>
+
 </form>
 </body>
 </html>
