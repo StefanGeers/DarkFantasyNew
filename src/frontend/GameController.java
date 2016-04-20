@@ -3,7 +3,6 @@ package frontend;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.catalina.connector.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import characterclasses.Player;
 import database.Account;
 import database.AccountDao;
 
@@ -20,11 +20,8 @@ public class GameController {
 	
 	@RequestMapping (value="/", method=RequestMethod.GET)
 	public String DarkFantasyNew(Model model, HttpSession s){
-		try{ if(s == null || s.getAttribute("account").equals(null)){
-				return "frontpage";	
-			}
-		} catch (NullPointerException e){ return "frontpage";}
-		return "welcome";
+		if(SessionCheck(s)){return "welcome";}
+		else {return "frontpage";}
 	}
 	
 	@RequestMapping (value="/register", method=RequestMethod.GET)
@@ -42,25 +39,25 @@ public class GameController {
 	
 	@RequestMapping (value="/login", method=RequestMethod.GET)
 	public String Login(Model model, HttpSession s){
-		try{ if(s == null || s.getAttribute("account").equals(null)){
-				return "redirect:/";	
-			}
-		} catch (NullPointerException e){ return "redirect:/";}
-		return "welcome";
+		if(SessionCheck(s)){
+			return "welcome";
+		} else {return "redirect:/";}
 	}
 	
 	@RequestMapping (value="/welcome", method=RequestMethod.GET)
 	public String Welcome(Model model, HttpSession s){
-		try{ if(s == null || s.getAttribute("account").equals(null)){
-				return "redirect:/";	
-			}
-		} catch (NullPointerException e){ return "redirect:/";}
-		return "welcome";
+		if(!SessionCheck(s)){ return "redirect:/";}
+		Account a = (Account)s.getAttribute("account");
+		if(a.getPlayer() == null){
+			return "redirect:/charactercreation";
+		}
+		return "redirect:/";
 	}
 	
 	@RequestMapping (value="/charactercreation", method=RequestMethod.GET)
-	public String CharacterCreation(){
-		return "charactercreation";
+	public String CharacterCreation(Model model, HttpSession s){
+		if(SessionCheck(s)){return "charactercreation";}
+		else{return "redirect:/";}
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
@@ -81,8 +78,9 @@ public class GameController {
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	public String login(@ModelAttribute("Account") @Valid Account account, BindingResult result, Model model, HttpSession session){
+		
 		Account accountpw = AccountDao.findAccountByPassword(new String(account.getPassword()),new String(account.getUsername()));
-		if(accountpw.equals(null)){
+		if(accountpw == null){
 			result.addError(new FieldError("account", "username", "No account found with that username/password combination."));
 		}
 		if (!result.hasErrors()) {
@@ -95,9 +93,33 @@ public class GameController {
 		}
 	}
 	
+	@RequestMapping (value="/charactercreation", method=RequestMethod.POST)
+	public String CharacterCreated(@ModelAttribute("Player") @Valid Player player, BindingResult result, HttpSession s){
+		if(!SessionCheck(s)){return "redirect:/";}
+		if(result.hasErrors()){return "redirect:/welcome";}
+		Account a = (Account) s.getAttribute("account");
+		if(a.getPlayer()!=null){return "redirect:/";}
+		AccountDao.createPlayer(a, player.getName(), player.getSex());
+		s.setAttribute("Player", player);
+		return "redirect:/welcome";
+	}
+	
 	@ModelAttribute("Account")
 	public Account retrieveAccount(){
 		return new Account();
+	}
+	
+	@ModelAttribute("Player")
+	public Player retrievePlayer(){
+		return new Player();
+	}
+	
+	private boolean SessionCheck(HttpSession s){
+		try{ if(s == null || s.getAttribute("account").equals(null)){
+			return false;	
+			}
+		} catch (NullPointerException e){ return false;}
+		return true;
 	}
 
 }

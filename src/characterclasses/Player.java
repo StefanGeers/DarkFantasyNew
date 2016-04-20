@@ -8,14 +8,13 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 import database.Account;
-import items.Sword;
-import items.Weapon;
 
 @Entity
-public class Player extends Character{
-	private String playerName;
+public class Player {
+	private String name;
 	private Account account;
 	private Long id;
+	private String sex;	
 	
 	@Id
 	@GeneratedValue(generator="increment")
@@ -24,36 +23,31 @@ public class Player extends Character{
 		return id;
 	}
 	
-	public Player(){super();}
-	
-	public Weapon Weapon = new Sword("sword", 40, 10, 25);
-
-	public Player(String PC_name, int maxHealth, int currentHealth, int damageDealing){
-		super(maxHealth, currentHealth);
-		setPlayerName(PC_name);
-		setDamage(damageDealing);
-		setProfession("yourself");
+	@OneToOne (mappedBy="player")
+	public Account getAccount() {
+		return account;
 	}
 	
-	public void setPlayerName(String name){
-		this.playerName = name;
-	}
-
-	public String getName(){
-		return this.playerName;
-	}
-
 	public void setAccount(Account account) {
-		this.account = account;
+		if(this.account==null){this.account = account;}
 	}
 	
 	@SuppressWarnings("unused")
 	private void setId(Long id) {
 		this.id = id;
 	}
-
-	@OneToOne
-	public Account getAccount(){
-		return account;
+	
+	public String getName() {
+		return name;
 	}
+	public void setName(String name) {
+		if(this.name == null){this.name = name;}
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		if(this.sex == null){this.sex = sex;}
+	}
+
 }

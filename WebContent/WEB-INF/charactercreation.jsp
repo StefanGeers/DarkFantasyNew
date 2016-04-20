@@ -12,11 +12,26 @@
 <body>
 Hier komt character creation!
 
-<form:form method="post">
-		<p>
-			<label for=player>Character Name: </label><input type="text" name="charactername"><br>
-			<input type="submit" value="Create Character">
-		</p>
-	</form:form>
+<form:form class="form-horizontal" method="post" modelAttribute="Player">
+  <div class="form-group">
+    <label for="inputUsername3" class="col-sm-2 control-label">Character Name</label>
+    <div class="col-sm-10">
+      <form:input path="name" type="text" class="form-control" name="playername" id="inputEmail3" placeholder="Character Name"/>
+    </div>
+  </div>
+  <table>
+	<tr>
+		<td>Sex :</td>
+			<td><form:radiobutton path="sex" value="M" />Male <form:radiobutton
+				path="sex" value="F" />Female</td>
+		<td><form:errors path="sex" cssClass="error" /></td>
+	</tr>
+  </table>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Create Character</button>
+    </div>
+  </div>
+</form:form>
 </body>
 </html>

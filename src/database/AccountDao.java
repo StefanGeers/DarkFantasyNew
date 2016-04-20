@@ -33,9 +33,18 @@ public class AccountDao {
 	 * Maak een nieuwe character en koppel die aan het account
 	 */
 	
-	public static void addPlayer(Account account, Player player){
-		account.setPlayer(player);
-		player.setAccount(account);
+	public static Player createPlayer(Account account, String sex, String name){
+		Player player = new Player();
+		player.setName(name);
+		player.setSex(sex);
+		
+		EntityManager em = EntityManagerManager.getAccountEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		em.persist(player);
+		em.find(Account.class, account.getId()).setPlayer(player);
+		em.find(Player.class, player.getId()).setAccount(account);
+		return player;
 	}
 	
 	/**
