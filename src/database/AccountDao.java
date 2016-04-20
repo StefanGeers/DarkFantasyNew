@@ -37,13 +37,18 @@ public class AccountDao {
 		Player player = new Player();
 		player.setName(name);
 		player.setSex(sex);
+		player.setAccount(account);
 		
-		EntityManager em = EntityManagerManager.getAccountEntityManager();
+		EntityManager em = EntityManagerManager.getPlayerEntityManager();
 		EntityTransaction t = em.getTransaction();
 		t.begin();
-		em.persist(player);
+		em.persist(player); 
+		
 		em.find(Account.class, account.getId()).setPlayer(player);
-		em.find(Player.class, player.getId()).setAccount(account);
+		
+		t.commit();
+		em.close();
+		
 		return player;
 	}
 	

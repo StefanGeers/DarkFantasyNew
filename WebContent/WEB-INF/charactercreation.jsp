@@ -17,6 +17,7 @@ Hier komt character creation!
     <label for="inputUsername3" class="col-sm-2 control-label">Character Name</label>
     <div class="col-sm-10">
       <form:input path="name" type="text" class="form-control" name="playername" id="inputEmail3" placeholder="Character Name"/>
+      <form:errors path="name"/><br>
     </div>
   </div>
   <table>
@@ -24,7 +25,7 @@ Hier komt character creation!
 		<td>Sex :</td>
 			<td><form:radiobutton path="sex" value="M" />Male <form:radiobutton
 				path="sex" value="F" />Female</td>
-		<td><form:errors path="sex" cssClass="error" /></td>
+		<td><form:errors path="sex"/></td>
 	</tr>
   </table>
   <div class="form-group">

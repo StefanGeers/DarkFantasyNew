@@ -96,7 +96,16 @@ public class GameController {
 	@RequestMapping (value="/charactercreation", method=RequestMethod.POST)
 	public String CharacterCreated(@ModelAttribute("Player") @Valid Player player, BindingResult result, HttpSession s){
 		if(!SessionCheck(s)){return "redirect:/";}
-		if(result.hasErrors()){return "redirect:/welcome";}
+		
+		if(player.getName() == null){
+			result.addError(new FieldError("player", "name", "No character name entered. Please choose a name for your character."));
+		}
+		if(player.getSex() == null){
+			result.addError(new FieldError("player", "sex", "No sex entered. Please choose a sex for your character."));
+		}
+		
+		if(result.hasErrors()){return "redirect:/charactercreation";}
+		
 		Account a = (Account) s.getAttribute("account");
 		if(a.getPlayer()!=null){return "redirect:/";}
 		AccountDao.createPlayer(a, player.getName(), player.getSex());
